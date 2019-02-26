@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  elasticsearch:
+    image: elasticsearch:2.4.6-alpine
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+  kibana:
+    image: seeruk/docker-kibana-sense:4.5
+    ports:
+      - "5601:5601"
